@@ -25,7 +25,7 @@ if [[ "$OPENAI_API_BASE" == *"<your-account>"* ]]; then
 fi
 
 # ---- Paths ----
-INPUT_FILE="$PROJECT_ROOT/data/spider2-aisql.jsonl"   # the agent reads the task JSONL directly
+INPUT_FILE="$PROJECT_ROOT/data/spider2-aifunc.jsonl"   # the agent reads the task JSONL directly
 SYSTEM_PROMPT="$SCRIPT_DIR/prompts/spider_agent.txt"
 DATABASES_PATH="$PROJECT_ROOT/resources/databases"
 DOCUMENTS_PATH="$PROJECT_ROOT/resources/knowledge"

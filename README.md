@@ -1,6 +1,6 @@
-# Spider2-AISQL
+# Spider2-AIFunc
 
-Spider2-AISQL is a benchmark for AI-Native Text-to-SQL. Every task requires Snowflake
+Spider2-AIFunc is a benchmark for AI-Native Text-to-SQL. Every task requires Snowflake
 [Cortex AISQL](https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql) functions.
 
 The benchmark is built on top of [Spider 2.0](https://github.com/xlang-ai/Spider2). See
@@ -15,7 +15,7 @@ gold, credentials, and external Spider2-Snow resources.
 
 | # | Part | Code | Guide |
 |---|------|------|-------|
-| 1 | The dataset | [`data/spider2-aisql.jsonl`](data/spider2-aisql.jsonl) | [docs/dataset.md](docs/dataset.md) |
+| 1 | The dataset | [`data/spider2-aifunc.jsonl`](data/spider2-aifunc.jsonl) | [docs/dataset.md](docs/dataset.md) |
 | 2 | How it was generated | [`src/`](src), [`scripts/`](scripts) | [docs/generation.md](docs/generation.md) |
 | 3 | How evaluation works | [`evaluation/`](evaluation) | [docs/evaluation.md](docs/evaluation.md) |
 | 4 | How to run a baseline | [`baseline/spider-agent-tc/`](baseline/spider-agent-tc) | [docs/baseline.md](docs/baseline.md) |

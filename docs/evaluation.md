@@ -46,7 +46,7 @@ Put predictions in `--pred-dir` (as `{id}/final.sql` or `{id}.sql`) and gold in 
 python evaluation/evaluate.py \
     --pred-dir   predictions/my_model \
     --gold-dir   gold \
-    --tasks      data/spider2-aisql.jsonl \
+    --tasks      data/spider2-aifunc.jsonl \
     --output-dir evaluation/results/my_model \
     -n 1 --workers 4
 ```

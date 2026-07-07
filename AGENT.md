@@ -6,7 +6,7 @@ is the short human overview; this file is the detailed version.
 
 ## What this repo is
 
-Spider2-AISQL is a benchmark for AI-Native Text-to-SQL. Each task is a natural-language
+Spider2-AIFunc is a benchmark for AI-Native Text-to-SQL. Each task is a natural-language
 question over a Snowflake database whose answer requires at least one Cortex AISQL function
 (`AI_CLASSIFY`, `AI_FILTER`, `AI_AGG`, `AI_EXTRACT`, `AI_SIMILARITY`, `AI_SENTIMENT`). A
 solution is a single Snowflake SQL query. The benchmark is derived from Spider 2.0.
@@ -25,7 +25,7 @@ the shipped tasks without that gold.
 ## Repository map
 
 ```
-data/spider2-aisql.jsonl     Part 1. The 393 tasks, one JSON object per line. Task only.
+data/spider2-aifunc.jsonl     Part 1. The 393 tasks, one JSON object per line. Task only.
 docs/                        One short guide per part (dataset, generation, evaluation, baseline).
 DATA.md                      Attribution, terms, and how to obtain the resources.
 
@@ -118,7 +118,7 @@ write one `.sql` per task, then point the evaluator at `<out_dir>`.
 `python scripts/run_batch.py --mode multi --input-file <your.jsonl> --output-dir outputs/run`.
 This needs Snowflake and LLM credentials in `.env`.
 
-**Inspect or filter the dataset.** `data/spider2-aisql.jsonl` is plain JSON lines. Read it
+**Inspect or filter the dataset.** `data/spider2-aifunc.jsonl` is plain JSON lines. Read it
 directly. Field meanings are in [docs/dataset.md](docs/dataset.md).
 
 ## What not to touch

@@ -1,6 +1,6 @@
 # How the benchmark was generated (reference)
 
-This explains how Spider2-AISQL was built by turning Spider 2.0's traditional SQL queries
+This explains how Spider2-AIFunc was built by turning Spider 2.0's traditional SQL queries
 into AISQL tasks. It is provided for reference. The generation pipeline requires source
 gold SQL and execution results as input. In our build, these came from Spider 2.0 gold
 files, which are access-controlled and not redistributed here (see [../DATA.md](../DATA.md)).
@@ -126,7 +126,7 @@ python scripts/build_dataset.py \
 ```
 
 `build_dataset` produces the internal benchmark, one directory per instance, with gold. The
-public file `data/spider2-aisql.jsonl` is a gold-stripped export of the selected instances:
+public file `data/spider2-aifunc.jsonl` is a gold-stripped export of the selected instances:
 the same tasks with the gold removed.
 
 ## Additional quality validation

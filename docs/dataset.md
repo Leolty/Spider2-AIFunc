@@ -1,6 +1,6 @@
 # The dataset
 
-The benchmark is a single JSONL file, `data/spider2-aisql.jsonl`, with one task per line.
+The benchmark is a single JSONL file, `data/spider2-aifunc.jsonl`, with one task per line.
 It is task-only: the gold SQL and gold results are held out (see [../DATA.md](../DATA.md)).
 
 ## Fields

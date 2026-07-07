@@ -884,7 +884,7 @@ Examples:
     )
     parser.add_argument(
         "--tasks", "-t", type=str, default=None,
-        help="Tasks JSONL (default: data/spider2-aisql.jsonl)",
+        help="Tasks JSONL (default: data/spider2-aifunc.jsonl)",
     )
     parser.add_argument(
         "--gold-dir", "-g", type=str, default=None,
@@ -935,7 +935,7 @@ Examples:
     if not output_dir.is_absolute():
         output_dir = PROJECT_ROOT / output_dir
 
-    tasks_path = Path(args.tasks) if args.tasks else PROJECT_ROOT / "data" / "spider2-aisql.jsonl"
+    tasks_path = Path(args.tasks) if args.tasks else PROJECT_ROOT / "data" / "spider2-aifunc.jsonl"
     if not tasks_path.is_absolute():
         tasks_path = PROJECT_ROOT / tasks_path
 

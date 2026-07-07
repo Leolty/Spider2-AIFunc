@@ -2,14 +2,14 @@
 
 ## Attribution
 
-Spider2-AISQL is derived from [Spider 2.0](https://github.com/xlang-ai/Spider2) (ICLR
+Spider2-AIFunc is derived from [Spider 2.0](https://github.com/xlang-ai/Spider2) (ICLR
 2025), which is released under the MIT License, Copyright (c) 2024 bird_sql. We reuse the
 Spider2-Snow database environments and build AI-Native Text-to-SQL tasks on top of a
 subset of its queries. The MIT license notice is kept in `third_party/SPIDER2_LICENSE`.
 
 ## What this repo includes
 
-- **The task set** (`data/spider2-aisql.jsonl`, one task per line): 393 AISQL tasks. Each
+- **The task set** (`data/spider2-aifunc.jsonl`, one task per line): 393 AISQL tasks. Each
   task carries our natural-language instruction, the target `ai_functions`, the Snowflake
   database it runs on, and an evaluation config. It is task-only, with no gold SQL and no
   gold results.

@@ -367,7 +367,7 @@ def main():
 
         existing_stats = existing_index.get('stats', {})
         index = {
-            "description": "Spider2-AISQL Benchmark Dataset",
+            "description": "Spider2-AIFunc Benchmark Dataset",
             "variants": sorted(set([existing_index.get('variant', 'main'), variant])),
             "total_instances": len(merged_instances),
             "stats": {
@@ -386,7 +386,7 @@ def main():
         print(f"\n  Appending to existing index ({len(existing_instances)} existing + {len(new_entries)} new)")
     else:
         index = {
-            "description": "Spider2-AISQL Benchmark Dataset",
+            "description": "Spider2-AIFunc Benchmark Dataset",
             "variant": variant,
             "total_instances": len(index_entries),
             "stats": {

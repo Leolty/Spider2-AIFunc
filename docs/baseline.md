@@ -3,7 +3,7 @@
 `baseline/spider-agent-tc/` is a lightly adapted version of Spider 2.0's
 `spider-agent-tc`. It keeps the same round-based tool-calling loop: an LLM inspects schema
 files, runs Snowflake SQL through a tool, and terminates with a final SQL query. For
-Spider2-AISQL, we mainly add Cortex AISQL guidance to the prompt and make minor runtime
+Spider2-AIFunc, we mainly add Cortex AISQL guidance to the prompt and make minor runtime
 adjustments for AISQL workloads, which can take longer, return larger intermediate outputs,
 and expose small differences in tool-call formats across models.
 

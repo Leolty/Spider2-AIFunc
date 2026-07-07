@@ -17,7 +17,7 @@ import os
 from pathlib import Path
 
 PROJECT_ROOT = Path(os.getenv("AISQL_PROJECT_ROOT", Path(__file__).parent.parent)).resolve()
-TASKS = PROJECT_ROOT / "data" / "spider2-aisql.jsonl"
+TASKS = PROJECT_ROOT / "data" / "spider2-aifunc.jsonl"
 DB_DIR = PROJECT_ROOT / "resources" / "databases"
 KN_DIR = PROJECT_ROOT / "resources" / "knowledge"
 
