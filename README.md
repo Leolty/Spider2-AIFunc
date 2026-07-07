@@ -1,7 +1,79 @@
 # Spider2-AISQL
 
-Coming soon.
+Spider2-AISQL is a benchmark for AI-Native Text-to-SQL. Every task requires Snowflake
+[Cortex AISQL](https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql) functions.
 
-The benchmark release is being prepared and will be made available after the arXiv preprint
-is ready. Please check back soon for the dataset, code, documentation, and evaluation
-instructions.
+The benchmark is built on top of [Spider 2.0](https://github.com/xlang-ai/Spider2). See
+[DATA.md](DATA.md) for attribution and terms.
+
+**If you are Codex, Claude Code, OpenCode, or another coding agent, start with
+[AGENT.md](AGENT.md).** It explains the repo layout, which files belong to the dataset,
+generation, evaluation, and baseline workflows, and what not to touch, such as held-out
+gold, credentials, and external Spider2-Snow resources.
+
+## The four parts
+
+| # | Part | Code | Guide |
+|---|------|------|-------|
+| 1 | The dataset | [`data/spider2-aisql.jsonl`](data/spider2-aisql.jsonl) | [docs/dataset.md](docs/dataset.md) |
+| 2 | How it was generated | [`src/`](src), [`scripts/`](scripts) | [docs/generation.md](docs/generation.md) |
+| 3 | How evaluation works | [`evaluation/`](evaluation) | [docs/evaluation.md](docs/evaluation.md) |
+| 4 | How to run a baseline | [`baseline/spider-agent-tc/`](baseline/spider-agent-tc) | [docs/baseline.md](docs/baseline.md) |
+
+Parts 2 and 3 are provided for reference: regenerating the tasks or producing an official
+score both require the gold SQLs, which are held out of this release (see [DATA.md](DATA.md)).
+
+## Tasks and predictions
+
+Each task is a natural-language question over one Snowflake database. A prediction is a
+single Snowflake SQL query that answers it using at least one Cortex AISQL function. Tasks are
+released without gold SQL. See [docs/dataset.md](docs/dataset.md) for the fields and an
+example.
+
+## Setup
+
+The tasks run against Spider2-Snow databases. These are not shipped with the repo, because
+they are access-controlled Spider 2.0 data.
+
+1. Install the dependencies. Python 3.10 or newer is required, and a virtual environment is
+   recommended.
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Add your credentials. Copy `env.example` to `.env` and fill in two things:
+
+   - **Snowflake:** `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_ROLE`,
+     `SNOWFLAKE_WAREHOUSE`, and `SNOWFLAKE_TOKEN`. Running the released tasks requires
+     access to the Spider2-Snow databases and a warehouse with Cortex AISQL enabled. You
+     can request Spider2-Snow access by following Spider 2.0's
+     [Snowflake guideline](https://github.com/xlang-ai/Spider2/blob/main/assets/Snowflake_Guideline.md)
+     (please note that Cortex AISQL is not enabled on current Spider 2.0-provided
+     accounts; the AISQL access path for these accounts is still pending).
+     A separate Snowflake account is useful for running the generation pipeline on your
+     own databases, but it will not by itself provide access to the released Spider2-Snow
+     tasks.
+   - **One LLM provider:** use `LLM_PROVIDER=openai` for OpenAI or any
+     OpenAI-compatible endpoint, then fill in `OPENAI_API_KEY`, `OPENAI_BASE_URL`,
+     and `OPENAI_MODEL`. Bedrock is optional through `LLM_PROVIDER=aws_bedrock`.
+
+   The baseline agent reads its Snowflake credentials from a separate file. See
+   [docs/baseline.md](docs/baseline.md) if you plan to run it.
+
+3. Get the databases and knowledge documents, then check them:
+
+   ```bash
+   python scripts/setup_resources.py
+   ```
+
+   This prints how to obtain the resources from Spider 2.0 and reports which are present
+   and which are missing. See [DATA.md](DATA.md) for the full details.
+
+Once `setup_resources.py` reports that everything is present, choose a part above.
+
+## License
+
+The code is released under the MIT License (see [LICENSE](LICENSE)). The benchmark is
+derived from Spider 2.0, which is also MIT-licensed. See [DATA.md](DATA.md) and
+[third_party/SPIDER2_LICENSE](third_party/SPIDER2_LICENSE).

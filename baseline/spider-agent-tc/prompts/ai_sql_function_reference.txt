@@ -1,0 +1,167 @@
+<ai_sql_function_reference>
+You MUST use the exact function signatures and syntax below. These are the supported Snowflake Cortex AI SQL functions. Do NOT use deprecated syntax (like SNOWFLAKE.CORTEX.* prefix).
+
+---
+
+### AI_CLASSIFY
+
+**Syntax**: `AI_CLASSIFY(<input>, <labels> [, <config_object>])`
+
+Categorizes text into a set of labels you provide.
+
+**Parameters**
+- `input`: Text string to classify.
+- `labels`: Array of category strings OR objects with optional descriptions:
+  - Simple: `['sports', 'finance', 'technology']`
+  - With descriptions (max 25 words each): `[{'label': 'urgent', 'description': 'requires immediate response'}, {'label': 'normal'}]`
+- `config_object` (Optional):
+  - `output_mode`: `'multi'` for multi-label (default: `'single'`)
+  - `task_description`: Brief task explanation (50 words max)
+
+**Returns**: JSON object `{"labels": ["best_match"]}`. Multi-label: `{"labels": ["match_1", "match_2"]}`.
+
+**Example**
+```sql
+SELECT AI_CLASSIFY('My internet is not working', ['technical_issue', 'billing', 'general_inquiry']);
+-- Returns: {"labels": ["technical_issue"]}
+
+-- Multi-label with config
+SELECT AI_CLASSIFY('I love traveling and cooking.', ['travel', 'cooking', 'gaming'], {'output_mode': 'multi'});
+-- Returns: {"labels": ["travel", "cooking"]}
+```
+
+---
+
+### AI_SENTIMENT
+
+**Syntax**: `AI_SENTIMENT(<text> [, <categories>])`
+
+Evaluates the emotional tone of text, optionally broken down by specific aspects.
+
+**Parameters**
+- `text`: Text string to analyze.
+- `categories` (Optional): Array of aspect strings (max 10, each up to 30 chars). If omitted, only overall sentiment is returned.
+
+**Returns**: JSON with `"categories"` array. Each entry has `name` and `sentiment` (one of: `positive`, `negative`, `neutral`, `mixed`, `unknown`). Always includes `"overall"`.
+
+**Example**
+```sql
+SELECT AI_SENTIMENT('The pizza was great!');
+-- Returns: {"categories": [{"name": "overall", "sentiment": "positive"}]}
+
+SELECT AI_SENTIMENT('The pizza was great but the delivery was late.', ['Food', 'Delivery']);
+-- Returns: {"categories": [{"name": "overall", "sentiment": "mixed"}, {"name": "Food", "sentiment": "positive"}, {"name": "Delivery", "sentiment": "negative"}]}
+```
+
+---
+
+### AI_EXTRACT
+
+**Syntax**: `AI_EXTRACT(<text>, <responseFormat>)`
+
+Extracts structured facts from unstructured text. Use named parameters: `text => '...'`, `responseFormat => ...`.
+
+**Parameters**
+- `text`: Text to extract from (named parameter required).
+- `responseFormat`: Defines extraction schema:
+  - Object format: `{'name': 'What is the person name?', 'city': 'What is the city?'}`
+  - Array format: `['What is the first name?', 'Where does the person live?']`
+  - Supports questions or descriptions as values.
+- Limits: max 100 questions, max 512 tokens per answer.
+
+**Returns**: `{"error": null, "response": {"field1": "value1", "field2": "value2"}}` (object format) or `{"error": null, "response": ["val1", "val2"]}` (array format).
+
+**Example**
+```sql
+SELECT AI_EXTRACT(
+    text => 'John Doe lives in New York and works for Snowflake.',
+    responseFormat => {'name': 'What is the person name?', 'city': 'What is the city?', 'company': 'What company does the person work for?'}
+);
+-- Returns: {"error": null, "response": {"name": "John Doe", "city": "New York", "company": "Snowflake"}}
+```
+
+---
+
+### AI_FILTER
+
+**Syntax**: `AI_FILTER(<input>)`
+
+Returns TRUE or FALSE based on whether the input meets a natural language condition. Best used in WHERE clauses.
+
+**Parameters**
+- `input`: Natural language statement. Can be:
+  - String constant: `AI_FILTER('Is Canada in North America?')`
+  - With CONCAT: `CONCAT('The customer is satisfied: ', review_text)`
+  - With PROMPT: `PROMPT('The reviewer enjoyed the restaurant: {0}', review_text)`
+- Tip: Use detailed conditions, not vague words. Avoid NULL column values.
+
+**Returns**: `BOOLEAN` (TRUE or FALSE).
+
+**Example**
+```sql
+SELECT * FROM reviews
+WHERE AI_FILTER(PROMPT('The reviewer enjoyed the restaurant: {0}', review_text));
+
+SELECT country, region FROM countries CROSS JOIN regions
+WHERE AI_FILTER(PROMPT('{0} is in {1}', country, region));
+```
+
+---
+
+### AI_SIMILARITY
+
+**Syntax**: `AI_SIMILARITY(<input1>, <input2>)`
+
+Calculates semantic similarity between two texts using vector embeddings. Measures conceptual closeness, not keyword overlap.
+
+**Parameters**
+- `input1`: Text string to compare.
+- `input2`: Text string to compare against.
+
+**Returns**: `FLOAT` between -1.0 and 1.0 (1.0 = highly similar).
+
+**Example**
+```sql
+SELECT review_text, AI_SIMILARITY(review_text, 'The battery drains too fast') AS score
+FROM product_reviews
+ORDER BY score DESC
+LIMIT 3;
+```
+
+---
+
+### AI_AGG
+
+**Syntax**: `AI_AGG(<expr>, <instruction>)`
+
+Aggregate function that processes grouped text rows into a single summary or analysis. Supports datasets larger than the model's context window.
+
+**Parameters**
+- `expr`: Text column or expression (can use `CONCAT()` or `||` to combine columns).
+- `instruction`: Natural language string specifying how to aggregate.
+- Tips: Use declarative statements, describe the data and use case.
+
+**Returns**: Single string per group.
+
+**Example**
+```sql
+SELECT product_id, AI_AGG(review_text, 'Summarize the product reviews for potential consumers') AS summary
+FROM reviews
+GROUP BY product_id;
+
+-- Combining multiple columns
+SELECT restaurant_id, AI_AGG(
+    'Menu Item: ' || menu_item || ', Review: ' || review_text,
+    'Summarize the restaurant reviews, highlighting menu items mentioned'
+) AS summary
+FROM restaurant_reviews
+GROUP BY restaurant_id;
+```
+---
+
+To ensure your final SQL query produces correct, testable results:
+
+- Some AI functions return JSON objects. When these appear in your final output columns, always extract the scalar value using Snowflake JSON accessor syntax (e.g., `:labels[0]::STRING`). Raw JSON objects in output columns will not pass evaluation.
+- Strictly follow the parameters specified in the instruction. Do not add, assume, or invent parameters that are not explicitly requested, any deviation from the instruction's specifications will cause test failures.
+
+</ai_sql_function_reference>
