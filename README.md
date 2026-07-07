@@ -72,6 +72,14 @@ they are access-controlled Spider 2.0 data.
 
 Once `setup_resources.py` reports that everything is present, choose a part above.
 
+## A small note on this release
+
+Much of this repository, including all code organization and refactoring, documentation, and
+guides, was prepared by Claude Code (Claude Opus 4.8) and Codex (GPT 5.5). It has been
+reviewed manually, but given the volume of material we cannot guarantee that it is entirely
+free of errors. If you find a bug, a broken reference, or any other issue, please
+[open an issue](https://github.com/Leolty/Spider2-AIFunc/issues).
+
 ## License
 
 The code is released under the MIT License (see [LICENSE](LICENSE)). The benchmark is
