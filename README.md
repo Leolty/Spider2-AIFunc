@@ -5,10 +5,10 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2607.06229"><img src="https://img.shields.io/badge/Paper-arXiv%202607.06229-b31b1b?style=flat-square&labelColor=2f2f2f&logo=arxiv&logoColor=white" alt="arXiv"></a>
-  <a href="https://huggingface.co/datasets/tianyang/spider2-aifunc"><img src="https://img.shields.io/badge/Dataset-Hugging%20Face-FFD21E?style=flat-square&labelColor=2f2f2f&logo=huggingface&logoColor=black" alt="Hugging Face Dataset"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-3DA639?style=flat-square&labelColor=2f2f2f&logo=opensourceinitiative&logoColor=white" alt="License: MIT"></a>
-  <a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql"><img src="https://img.shields.io/badge/Platform-Snowflake%20Cortex%20AISQL-29B5E8?style=flat-square&labelColor=2f2f2f&logo=snowflake&logoColor=white" alt="Snowflake Cortex AISQL"></a>
+  <a href="https://arxiv.org/abs/2607.06229"><img src="https://img.shields.io/badge/Paper-arXiv%202607.06229-B91C1C?style=flat-square&labelColor=334155&logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://huggingface.co/datasets/tianyang/spider2-aifunc"><img src="https://img.shields.io/badge/Dataset-Hugging%20Face-EAB308?style=flat-square&labelColor=334155&logo=huggingface&logoColor=white" alt="Hugging Face Dataset"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-16A34A?style=flat-square&labelColor=334155&logo=opensourceinitiative&logoColor=white" alt="License: MIT"></a>
+  <a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql"><img src="https://img.shields.io/badge/Platform-Snowflake%20Cortex%20AISQL-0284C7?style=flat-square&labelColor=334155&logo=snowflake&logoColor=white" alt="Snowflake Cortex AISQL"></a>
 </p>
 
 Spider2-AIFunc extends [Spider 2.0](https://github.com/xlang-ai/Spider2) and Spider2-Snow
