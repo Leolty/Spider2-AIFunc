@@ -1,17 +1,27 @@
-# Spider2-AIFunc
+<h1 align="center">Spider2-AIFunc</h1>
 
-Spider2-AIFunc is a benchmark for AI-Native Text-to-SQL. Every task requires Snowflake
-[Cortex AISQL](https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql) functions.
+<p align="center">
+  <strong>A benchmark for AI-Native Text-to-SQL with Snowflake Cortex AISQL</strong>
+</p>
 
-The benchmark is built on top of [Spider 2.0](https://github.com/xlang-ai/Spider2). See
-[DATA.md](DATA.md) for attribution and terms.
+<p align="center">
+  <a href="https://arxiv.org/abs/2607.06229"><img src="https://img.shields.io/badge/Paper-arXiv%202607.06229-b31b1b?style=flat-square&labelColor=2f2f2f&logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://huggingface.co/datasets/tianyang/spider2-aifunc"><img src="https://img.shields.io/badge/Dataset-Hugging%20Face-FFD21E?style=flat-square&labelColor=2f2f2f&logo=huggingface&logoColor=black" alt="Hugging Face Dataset"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-3DA639?style=flat-square&labelColor=2f2f2f&logo=opensourceinitiative&logoColor=white" alt="License: MIT"></a>
+  <a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql"><img src="https://img.shields.io/badge/Platform-Snowflake%20Cortex%20AISQL-29B5E8?style=flat-square&labelColor=2f2f2f&logo=snowflake&logoColor=white" alt="Snowflake Cortex AISQL"></a>
+</p>
+
+Spider2-AIFunc extends [Spider 2.0](https://github.com/xlang-ai/Spider2) and Spider2-Snow
+with real-world tasks that require Snowflake
+[Cortex AISQL](https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql) functions
+inside SQL queries. See [DATA.md](DATA.md) for attribution and terms.
 
 **If you are Codex, Claude Code, OpenCode, or another coding agent, start with
 [AGENT.md](AGENT.md).** It explains the repo layout, which files belong to the dataset,
 generation, evaluation, and baseline workflows, and what not to touch, such as held-out
 gold, credentials, and external Spider2-Snow resources.
 
-## The four parts
+## Repository Map
 
 | # | Part | Code | Guide |
 |---|------|------|-------|
@@ -20,8 +30,9 @@ gold, credentials, and external Spider2-Snow resources.
 | 3 | How evaluation works | [`evaluation/`](evaluation) | [docs/evaluation.md](docs/evaluation.md) |
 | 4 | How to run a baseline | [`baseline/spider-agent-tc/`](baseline/spider-agent-tc) | [docs/baseline.md](docs/baseline.md) |
 
-Parts 2 and 3 are provided for reference: regenerating the tasks or producing an official
-score both require the gold SQLs, which are held out of this release (see [DATA.md](DATA.md)).
+The generation and evaluation code are provided for reference: regenerating the tasks or
+producing an official score both require the gold SQLs, which are held out of this release
+(see [DATA.md](DATA.md)).
 
 ## Tasks and predictions
 
